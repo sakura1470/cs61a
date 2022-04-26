@@ -35,10 +35,16 @@ def make_repeater(func, n):
     5
     """
     "*** YOUR CODE HERE ***"
-    def repeater(x):
-        return 
-    return f
-
+    def make(x):
+        if n == 0:
+            return x
+        else:
+            result = func(x)
+            for i in range(n-1):
+                result = func(result)
+            return result
+    return make
+        
 
 def num_eights(pos):
     """Returns the number of times 8 appears as a digit of pos.
@@ -62,6 +68,14 @@ def num_eights(pos):
     True
     """
     "*** YOUR CODE HERE ***"
+    if pos < 10 and pos != 8:
+        return 0
+    elif pos == 8:
+        return 1
+    else:
+        return num_eights(pos % 10) + num_eights(pos // 10)
+        
+
 
 
 def pingpong(n):
@@ -97,6 +111,15 @@ def pingpong(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    def adjust(num, j, k):
+        if num == n:
+            return j + k
+        elif num % 8 == 0 or num_eights(num) > 0:
+            return adjust(num + 1, j + k, -k)
+        else :
+            return adjust(num + 1, j + k, k)
+    return adjust(1, 0, 1)
+
 
 
 def missing_digits(n):
@@ -128,6 +151,19 @@ def missing_digits(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    def adjust(num,last_num,count):
+        if num == 0:
+            return count
+        elif num == last_num:
+            return count 
+        elif num < 10:
+            return count + last_num - num -1
+        elif last_num - (num % 10) > 1:
+            return adjust(num // 10, num % 10,count + last_num - num % 10 -1)
+        else:
+            return adjust(num // 10, num % 10, count)
+    return adjust(n // 10, n % 10, 0)
+    
 
 
 def get_next_coin(coin):
@@ -164,6 +200,15 @@ def count_coins(change):
     True
     """
     "*** YOUR CODE HERE ***"
+    def help(num,coin):
+        if not coin:
+            return 0
+        elif num < coin:
+            return 0
+        elif num == coin:
+            return 1
+        return help(num - coin, coin) + help(num, get_next_coin(coin))
+    return help(change, 1)
 
 
 def zero(f):
@@ -177,12 +222,13 @@ def successor(n):
 def one(f):
     """Church numeral 1: same as successor(zero)"""
     "*** YOUR CODE HERE ***"
+    return successor(zero(f))
 
 
 def two(f):
     """Church numeral 2: same as successor(successor(zero))"""
     "*** YOUR CODE HERE ***"
-
+    return successor(one(f))
 
 three = successor(two)
 
@@ -200,6 +246,11 @@ def church_to_int(n):
     3
     """
     "*** YOUR CODE HERE ***"
+    def f(x):
+        return x + 1
+        
+    return n(f(0)) 
+
 
 
 def add_church(m, n):
@@ -209,7 +260,7 @@ def add_church(m, n):
     5
     """
     "*** YOUR CODE HERE ***"
-
+    
 
 def mul_church(m, n):
     """Return the Church numeral for m * n, for Church numerals m and n.
