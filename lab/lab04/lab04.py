@@ -12,7 +12,8 @@ def couple(s, t):
     """
     assert len(s) == len(t)
     "*** YOUR CODE HERE ***"
-
+    
+    return [[s[i], t[i]] for i in range(len(s))]
 
 from math import sqrt
 
@@ -29,6 +30,7 @@ def distance(city_a, city_b):
     5.0
     """
     "*** YOUR CODE HERE ***"
+    return sqrt((get_lat(city_a) - get_lat(city_b))**2 + (get_lon(city_a) - get_lon(city_b))**2 )
 
 
 def closer_city(lat, lon, city_a, city_b):
@@ -47,6 +49,11 @@ def closer_city(lat, lon, city_a, city_b):
     'Bucharest'
     """
     "*** YOUR CODE HERE ***"
+    city_cur = make_city('city_cur', lat, lon)
+    if distance(city_cur, city_a) >= distance(city_cur, city_b):
+        return get_name(city_b)
+    elif distance(city_cur, city_a) < distance(city_cur, city_b):
+        return get_name(city_a)
 
 
 def check_city_abstraction():
@@ -152,6 +159,14 @@ def berry_finder(t):
     True
     """
     "*** YOUR CODE HERE ***"
+    if label(t) == "berry":
+        return True
+    else:
+        for brance in branches(t):
+            if berry_finder(brance):
+                return True
+    return False
+
 
 
 def sprout_leaves(t, leaves):
@@ -188,6 +203,10 @@ def sprout_leaves(t, leaves):
           2
     """
     "*** YOUR CODE HERE ***"
+    if is_leaf(t):
+        return tree(label(t), [tree(item) for item in leaves])
+    else :
+        return tree(label(t), [sprout_leaves(branch, leaves) for branch in branches(t)])
 
 
 # Abstraction tests for sprout_leaves and berry_finder
@@ -247,7 +266,7 @@ def coords(fn, seq, lower, upper):
     [[-2, 4], [1, 1], [3, 9]]
     """
     "*** YOUR CODE HERE ***"
-    return ______
+    return [[x,fn(x)] for x in seq if fn(x) <= upper and fn(x) >= lower]
 
 
 def riffle(deck):
@@ -260,7 +279,7 @@ def riffle(deck):
     [0, 10, 1, 11, 2, 12, 3, 13, 4, 14, 5, 15, 6, 16, 7, 17, 8, 18, 9, 19]
     """
     "*** YOUR CODE HERE ***"
-    return _______
+    return sum(couple(deck[: len(deck) // 2],deck[len(deck) // 2 :]), [])
 
 
 def add_trees(t1, t2):
