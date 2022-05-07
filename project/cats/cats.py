@@ -148,8 +148,17 @@ def autocorrect(typed_word, valid_words, diff_function, limit):
     """
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
-
-    
+    k = 0
+    for i in range (len(valid_words)):
+        if typed_word == valid_words[i]:
+            k = i 
+            break
+        if diff_function(typed_word, valid_words[i], limit) < diff_function(typed_word, valid_words[k], limit):
+            k = i
+    if diff_function(typed_word, valid_words[k], limit) <= limit:
+        return valid_words[k]
+    else :
+        return typed_word    
     # END PROBLEM 5
 
 
@@ -176,7 +185,16 @@ def feline_flips(start, goal, limit):
     5
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
+    if start == goal :
+        return 0
+    elif limit == 0 :
+        return 1
+    elif len(start) == 0 or len(goal) == 0 :
+        return max(len(start), len(goal))
+    elif start[0] != goal[0] :
+        return 1 + feline_flips(start[1:], goal[1:], limit - 1)
+    else :
+        return feline_flips(start[1:], goal[1:], limit)
     # END PROBLEM 6
 
 
@@ -197,7 +215,6 @@ def minimum_mewtations(start, goal, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    assert False, 'Remove this line'
 
     if ______________:  # Fill in the condition
         # BEGIN
