@@ -216,22 +216,30 @@ def minimum_mewtations(start, goal, limit):
     3
     """
 
-    if ______________:  # Fill in the condition
+    if start == goal:  # Fill in the condition
         # BEGIN
         "*** YOUR CODE HERE ***"
+        return 0
         # END
 
-    elif ___________:  # Feel free to remove or add additional cases
+    elif len(start) == 0 or len(goal) == 0:  # Feel free to remove or add additional cases
         # BEGIN
         "*** YOUR CODE HERE ***"
+        return max(len(start), len(goal))
         # END
+    elif limit == 0:
+        return 1
 
     else:
-        add = ...  # Fill in these lines
-        remove = ...
-        substitute = ...
+        add = goal[0] + start  # Fill in these lines
+        remove = start[1:]
+        substitute = goal[0] + start[1:]
         # BEGIN
         "*** YOUR CODE HERE ***"
+        if start[0] == goal[0]:
+            return minimum_mewtations(start[1:], goal[1:], limit)
+        else:
+            return min(1 + minimum_mewtations(add, goal, limit - 1), 1 + minimum_mewtations(remove, goal, limit - 1), 1 + minimum_mewtations(substitute, goal, limit - 1))
         # END
 
 
@@ -274,8 +282,16 @@ def report_progress(sofar, prompt, user_id, send):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    count = 0
+    for i in sofar:
+        if i != prompt[count]:
+            break
+        else:
+            count = count + 1
+    result = {'id': user_id, 'progress': count / len(prompt)}
+    send(result)
+    return result['progress']
     # END PROBLEM 8
-
 
 def fastest_words_report(times_per_player, words):
     """Return a text description of the fastest words typed by each player."""
@@ -307,6 +323,9 @@ def time_per_word(times_per_player, words):
     """
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
+    times = [ [ i[k]-i[k-1] for k in range(1,len(i))] for i in times_per_player ]
+    return game(words, times)
+
     # END PROBLEM 9
 
 
@@ -325,6 +344,22 @@ def fastest_words(game):
     word_indices = range(len(get_words(game)))    # contains an *index* for each word
     # BEGIN PROBLEM 10
     "*** YOUR CODE HERE ***"
+    result = [[] for _ in player_indices]
+    
+    for word in word_indices:
+        
+        times = float("inf") # inf positive infinity 
+                             # -inf negative infinity
+        n = 0
+        for player in player_indices:
+            if time(game, player, word) < times :
+                times = time(game, player ,word)
+                n = player
+        result[n].append(word_at(game, word))    
+    return result
+
+        
+
     # END PROBLEM 10
 
 
