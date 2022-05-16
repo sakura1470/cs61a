@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+from tkinter import W
+
+
+>>>>>>> 3274a00476dff72aadf329bbe408993b0fc4fe35
 HW_SOURCE_FILE = __file__
 
 
@@ -52,13 +58,21 @@ def planet(size):
     """Construct a planet of some size."""
     assert size > 0
     "*** YOUR CODE HERE ***"
+<<<<<<< HEAD
 
+=======
+    return ["planet", size]
+>>>>>>> 3274a00476dff72aadf329bbe408993b0fc4fe35
 
 def size(w):
     """Select the size of a planet."""
     assert is_planet(w), 'must call size on a planet'
     "*** YOUR CODE HERE ***"
+<<<<<<< HEAD
 
+=======
+    return w[1]
+>>>>>>> 3274a00476dff72aadf329bbe408993b0fc4fe35
 
 def is_planet(w):
     """Whether w is a planet."""
@@ -121,7 +135,14 @@ def balanced(m):
     if is_planet(m):
         return True
     else:
+<<<<<<< HEAD
         if size(left(end(m))) 
+=======
+        left_end, right_end = end(left(m)), end(right(m))
+        left_total, right_total = length(left(m)) * total_weight(left_end), length(right(m)) * total_weight(right_end)
+        return balanced(left_end) and balanced(right_end) and left_total == right_total
+
+>>>>>>> 3274a00476dff72aadf329bbe408993b0fc4fe35
 
 def totals_tree(m):
     """Return a tree representing the mobile with its total weight at the root.
@@ -153,6 +174,15 @@ def totals_tree(m):
     True
     """
     "*** YOUR CODE HERE ***"
+<<<<<<< HEAD
+=======
+    if is_planet(m):
+        return tree(total_weight(m))
+    else:
+        return tree(total_weight(m), [totals_tree(end(left(m))), totals_tree(end(right(m)))])
+
+        
+>>>>>>> 3274a00476dff72aadf329bbe408993b0fc4fe35
 
 
 def replace_loki_at_leaf(t, lokis_replacement):
@@ -185,6 +215,16 @@ def replace_loki_at_leaf(t, lokis_replacement):
     True
     """
     "*** YOUR CODE HERE ***"
+<<<<<<< HEAD
+=======
+    if is_leaf(t) and label(t) == "loki":
+        return tree(lokis_replacement)
+    else:
+        return tree(label(t),[replace_loki_at_leaf(branch, lokis_replacement) for branch in branches(t)])
+
+
+
+>>>>>>> 3274a00476dff72aadf329bbe408993b0fc4fe35
 
 
 def has_path(t, word):
@@ -219,7 +259,20 @@ def has_path(t, word):
     """
     assert len(word) > 0, 'no path for empty word.'
     "*** YOUR CODE HERE ***"
+<<<<<<< HEAD
 
+=======
+    if label(t) != word[0]:
+        return False
+    elif label(t) == word[0] and len(word) == 1:
+        return True
+    else:
+        word = word[1:]
+        for branch in branches(t):
+            if has_path(branch, word):
+                return True
+    return False
+>>>>>>> 3274a00476dff72aadf329bbe408993b0fc4fe35
 
 def preorder(t):
     """Return a list of the entries in this tree in the order that they
@@ -232,7 +285,14 @@ def preorder(t):
     [2, 4, 6]
     """
     "*** YOUR CODE HERE ***"
+<<<<<<< HEAD
 
+=======
+    if is_leaf(t):
+        return [label(t)]
+    else:
+        return [label(t)] + sum([preorder(branch) for branch in branches(t)],[])
+>>>>>>> 3274a00476dff72aadf329bbe408993b0fc4fe35
 
 def str_interval(x):
     """Return a string representation of interval x.
@@ -256,7 +316,11 @@ def interval(a, b):
 def lower_bound(x):
     """Return the lower bound of interval x."""
     "*** YOUR CODE HERE ***"
+<<<<<<< HEAD
 
+=======
+    return 
+>>>>>>> 3274a00476dff72aadf329bbe408993b0fc4fe35
 
 def upper_bound(x):
     """Return the upper bound of interval x."""
