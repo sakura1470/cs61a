@@ -6,7 +6,8 @@ def map(fn, lst):
     [25, 1, 4, 0]
     """
     "*** YOUR CODE HERE ***"
-
+    for i in range(len(lst)):
+        lst[i] = fn(lst[i])
 
 def swap(a, b):
     """Swap the contents of lists a and b.
@@ -20,7 +21,10 @@ def swap(a, b):
     [1, 'two', 3]
     """
     "*** YOUR CODE HERE ***"
-
+    c = []
+    c[:] = a[:]
+    a[:] = b[:]
+    b[:] = c[:]
 
 def lgk_pow(n, k):
     """Computes n^k.
@@ -32,9 +36,10 @@ def lgk_pow(n, k):
     >>> a = lgk_pow(2, 100000000) # make sure you have log time
     """
     "*** YOUR CODE HERE ***"
-
+    return pow(n,k)
 
 from math import sqrt
+from re import T
 
 
 def is_prime_sqrt(n):
@@ -60,3 +65,15 @@ def is_prime_sqrt(n):
     """
     # sqrt(k) will give the square root of k as a floating point (decimal)
     "*** YOUR CODE HERE ***"
+    '''
+    assert n >= 2
+    if sqrt(n) % 2 == 0 or (sqrt(n) + 1) % 2 == 0 :
+        return False
+    return True
+    '''
+    # maybe overszie 2251748274470911
+    assert n >= 2
+    for i in range(2,int(sqrt(n)) + 1~) :
+        if n % i == 0 :
+            return False
+    return True
