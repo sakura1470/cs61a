@@ -8,6 +8,7 @@ def insert_into_all(item, nested_list):
     [[0], [0, 1, 2], [0, 3]]
     """
     "*** YOUR CODE HERE ***"
+    return [[item] + list for list in nested_list ]
 
 
 def subseqs(s):
@@ -20,11 +21,12 @@ def subseqs(s):
     >>> subseqs([])
     [[]]
     """
-    if ________________:
-        ________________
+    if len(s) == 0:
+        return [[]]
+
     else:
-        ________________
-        ________________
+        result = subseqs(s[1:])
+        return result + insert_into_all(s[0], result)
 
 
 def non_decrease_subseqs(s):
@@ -43,14 +45,14 @@ def non_decrease_subseqs(s):
     """
     def subseq_helper(s, prev):
         if not s:
-            return ____________________
+            return [[]]
         elif s[0] < prev:
-            return ____________________
+            return subseq_helper(s[1:], prev)
         else:
-            a = ______________________
-            b = ______________________
-            return insert_into_all(________, ______________) + ________________
-    return subseq_helper(____, ____)
+            a = subseq_helper(s[1:], prev)
+            b = subseq_helper(s[1:], s[0])
+            return insert_into_all(s[0], b) + a
+    return subseq_helper(s , -1)
 
 
 def trade(first, second):
@@ -82,9 +84,9 @@ def trade(first, second):
     """
     m, n = 1, 1
 
-    equal_prefix = lambda: ______________________
-    while _______________________________:
-        if __________________:
+    equal_prefix = lambda: sum(first[:m]) == sum(second[:n])
+    while m < len(first) and n < len(second) and equal_prefix():
+        if sum(first[:m]) < sum(second[:n]):
             m += 1
         else:
             n += 1
@@ -122,11 +124,11 @@ def shuffle(cards):
     ['A♡', 'A♢', 'A♤', 'A♧', '2♡', '2♢', '2♤', '2♧', '3♡', '3♢', '3♤', '3♧']
     """
     assert len(cards) % 2 == 0, 'len(cards) must be even'
-    half = _______________
+    half = len(cards) // 2
     shuffled = []
-    for i in _____________:
-        _________________
-        _________________
+    for i in range(half):
+        shuffled.append(cards[i])
+        shuffled.append(cards[i + half])
     return shuffled
 
 
@@ -166,8 +168,16 @@ def add_trees(t1, t2):
       5
     """
     "*** YOUR CODE HERE ***"
-
-
+    if is_leaf(t1):
+        return tree(label(t1) + label(t2), branches(t2))
+    elif is_leaf(t2):
+        return tree(label(t2) + label(t1), branches(t1))
+    else:
+        lower, higher = sorted([branches(t1), branches(t2)], key=len)
+        for i in range(len(higher) - len(lower)):
+            lower.append(tree(0))
+        return tree(label(t1) + label(t2), [add_trees(b1, b2) for b1, b2 in zip(lower, higher)])
+     
 # Tree ADT
 
 def tree(label, branches=[]):
