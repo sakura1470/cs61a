@@ -1,3 +1,7 @@
+from ast import Num
+from itertools import count
+
+
 def repeated(t, k):
     """Return the first value in iterator T that appears K times in a row. Iterate through the items such that
     if the same iterator is passed into repeated twice, it continues in the second call at the point it left off
@@ -20,6 +24,16 @@ def repeated(t, k):
     """
     assert k > 1
     "*** YOUR CODE HERE ***"
+    last = 0
+    now = 0
+    for i in t:
+        if i == last:
+            now = now + 1
+        else:
+            now = 0
+        if now + 1 == k:
+            return i
+        last = i
 
 
 def permutations(seq):
@@ -45,6 +59,12 @@ def permutations(seq):
     [['a', 'b'], ['b', 'a']]
     """
     "*** YOUR CODE HERE ***"
+    if not seq:
+        yield[]
+    else :
+        for perm in permutations(seq[1:]):
+            for i in range(len(seq)):
+                yield perm[:i] + [seq[0]] + perm[i:]
 
 
 def make_generators_generator(g):
@@ -82,12 +102,12 @@ def make_generators_generator(g):
     9
     """
     def gener(x):
-        for e in ___________:
-            ______________________________
-            if _________________________:
-                ______________________________
-    for e in ___________:
-        ______________________________
+        for e in g():
+            yield e
+            if e == x:
+                return 
+    for e in g():
+        yield gener(e)
 
 
 def remainders_generator(m):
@@ -122,7 +142,7 @@ def remainders_generator(m):
     11
     """
     "*** YOUR CODE HERE ***"
-
+                
 
 def naturals():
     """A generator function that yields the infinite sequence of natural
