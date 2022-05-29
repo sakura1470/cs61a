@@ -28,7 +28,8 @@ def scale(it, multiplier):
     [2, 4, 6, 8, 10]
     """
     "*** YOUR CODE HERE ***"
-
+    for i in it:
+        yield i * multiplier
 
 def hailstone(n):
     """Yields the elements of the hailstone sequence starting at n.
@@ -45,3 +46,11 @@ def hailstone(n):
     1
     """
     "*** YOUR CODE HERE ***"
+    yield int(n) 
+    if n == 1:
+        return n
+    elif n % 2 == 0:
+        yield from hailstone(n / 2)
+    else :
+        yield from hailstone(n * 3 +1)
+        
