@@ -80,7 +80,6 @@ def examples():
 
 def total_weight(m):
     """Return the total weight of m, a planet or mobile.
-
     >>> t, u, v = examples()
     >>> total_weight(t)
     3
@@ -102,7 +101,6 @@ def total_weight(m):
 
 def balanced(m):
     """Return whether m is balanced.
-
     >>> t, u, v = examples()
     >>> balanced(t)
     True
@@ -131,7 +129,6 @@ def balanced(m):
 
 def totals_tree(m):
     """Return a tree representing the mobile with its total weight at the root.
-
     >>> t, u, v = examples()
     >>> print_tree(totals_tree(t))
     3
@@ -170,7 +167,6 @@ def totals_tree(m):
 def replace_loki_at_leaf(t, lokis_replacement):
     """Returns a new tree where every leaf value equal to "loki" has
     been replaced with lokis_replacement.
-
     >>> yggdrasil = tree('odin',
     ...                  [tree('balder',
     ...                        [tree('loki'),
@@ -209,7 +205,6 @@ def replace_loki_at_leaf(t, lokis_replacement):
 def has_path(t, word):
     """Return whether there is a path in a tree where the entries along the path
     spell out a particular word.
-
     >>> greetings = tree('h', [tree('i'),
     ...                        tree('e', [tree('l', [tree('l', [tree('o')])]),
     ...                                   tree('y')])])
@@ -252,7 +247,6 @@ def has_path(t, word):
 def preorder(t):
     """Return a list of the entries in this tree in the order that they
     would be visited by a preorder traversal (see problem description).
-
     >>> numbers = tree(1, [tree(2), tree(3, [tree(4), tree(5)]), tree(6, [tree(7)])])
     >>> preorder(numbers)
     [1, 2, 3, 4, 5, 6, 7]
@@ -346,7 +340,6 @@ def par2(r1, r2):
 
 def check_par():
     """Return two intervals that give different results for parallel resistors.
-
     >>> r1, r2 = check_par()
     >>> x = par1(r1, r2)
     >>> y = par2(r1, r2)
@@ -365,7 +358,6 @@ def multiple_references_explanation():
 def quadratic(x, a, b, c):
     """Return the interval that is the range of the quadratic defined by
     coefficients a, b, and c, for domain interval x.
-
     >>> str_interval(quadratic(interval(0, 2), -2, 3, -1))
     '-3 to 0.125'
     >>> str_interval(quadratic(interval(1, 3), 2, -3, 1))
@@ -413,7 +405,6 @@ def is_leaf(tree):
 def print_tree(t, indent=0):
     """Print a representation of this tree in which each node is
     indented by two spaces times its depth from the root.
-
     >>> print_tree(tree(1))
     1
     >>> print_tree(tree(1, [tree(2)]))
@@ -436,7 +427,6 @@ def print_tree(t, indent=0):
 
 def copy_tree(t):
     """Returns a copy of t. Only for testing purposes.
-
     >>> t = tree(5)
     >>> copy = copy_tree(t)
     >>> t = tree(6)
